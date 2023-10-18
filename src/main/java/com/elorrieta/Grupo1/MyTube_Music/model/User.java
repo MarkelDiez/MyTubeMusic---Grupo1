@@ -42,10 +42,28 @@ public class User {
 		this.contrasenya = contrasenya;
 		this.activo = activo;
 	}
-
 	public User() {
+		super();
+	}
+	public User(
+			@NotNull(message = "El campo login no puede ser nulo") @NotEmpty(message = "El campo login no puede estar vacio") @NotBlank(message = "El campo login no puede estar en blanco") String login,
+			@NotNull(message = "El campo nombre no puede ser nulo") @NotEmpty(message = "El campo nombre no puede estar vacio") @NotBlank(message = "El campo nombre no puede estar en blanco") String nombre,
+			@NotNull(message = "El campo apellido no puede ser nulo") @NotEmpty(message = "El campo apellido no puede estar vacio") @NotBlank(message = "El campo apellido no puede estar en blanco") String apellido,
+			@Email (message="Formato de mail incorrecto") String mail, 
+			@NotNull(message = "El campo password no puede ser nulo") @NotEmpty(message = "El campo password no puede estar vacio")	@NotBlank(message = "El campo password no puede estar en blanco")String contrasenya) {
+		this.login = login;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.mail = mail;
+		this.contrasenya = contrasenya;
+
 	}
 
+
+
+	public User(String contrasenya) {
+		this.contrasenya = contrasenya;
+	}
 	public int getId() {
 		return id;
 	}
