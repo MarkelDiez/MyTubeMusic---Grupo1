@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.elorrieta.Grupo1.MyTube_Music.model.User;
+import com.elorrieta.Grupo1.MyTube_Music.model.UserPostRequest;
 import com.elorrieta.Grupo1.MyTube_Music.repository.UserRepository;
 
 import jakarta.validation.Valid;
@@ -24,32 +25,45 @@ public class UsersController {
 	@Autowired
 	UserRepository userRepository;
 
-	@GetMapping("/api/user")
-	public ResponseEntity<List<User>> findAll() {
+	@GetMapping("/user")
+	public ResponseEntity<List<User>> findAll() throws UserNotFoundException {
 		return new ResponseEntity<List<User>>(userRepository.findAll(), HttpStatus.OK);
 	}
 
+<<<<<<< HEAD
 	@GetMapping("/api/user/{id}")
-	public ResponseEntity<User> findById(@PathVariable long id)/* throws UserNotFoundException*/ {
+	public ResponseEntity<User> findById(@PathVariable long id) throws UserNotFoundException {
+=======
+	@GetMapping("/user/{id}")
+	public ResponseEntity<User> findById(@PathVariable long id) throws UserNotFoundException {
+>>>>>>> 5cf270d01ec3072dde2df00ff390a53123dd1c9e
 		return new ResponseEntity<User>(userRepository.findById(id), HttpStatus.OK);
 	}
 
-	@PostMapping("/api/register")
-	public ResponseEntity<Integer> registerUser(@Valid @RequestBody User userRequest) {
-		User user = new User(userRequest.getLogin(), userRequest.getNombre(), userRequest.getApellido(),
-				userRequest.getMail(), userRequest.getContrasenya());
+	@PostMapping("/register")
+	public ResponseEntity<Integer> registerUser(@Valid @RequestBody UserPostRequest userPostRequest) {
+		User user = new User(userPostRequest.getLogin(), userPostRequest.getNombre(), userPostRequest.getApellido(),
+				userPostRequest.getMail(), userPostRequest.getContrasenya());
 		return new ResponseEntity<Integer>(userRepository.register(user), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/api/login/{login}")
-	public ResponseEntity<User> loginUser(@PathVariable String login) {
+	@GetMapping("/login/{login}")
+	public ResponseEntity<User> loginUser(@PathVariable String login) throws UserNotFoundException {
 		return new ResponseEntity<User>(userRepository.loginUser(login), HttpStatus.OK);
 
 	}
+	@PutMapping("/active/{id}")
+	public ResponseEntity<Integer> alterActive(@PathVariable("id") long id,
+			@Valid @RequestBody UserPostRequest userPostRequest) {
+		User user = new User(userPostRequest.getContrasenya());
+		return new ResponseEntity<Integer>(userRepository.alterActive(user), HttpStatus.OK);
 
-	@PutMapping("/api/password/{id}")
-	public ResponseEntity<Integer> updateEmployee(@PathVariable("id") long id,
-			@Valid @RequestBody User userPostRequest) {
+	}
+	
+
+	@PutMapping("/password/{id}")
+	public ResponseEntity<Integer> alterPassword(@PathVariable("id") long id,
+			@Valid @RequestBody UserPostRequest userPostRequest) {
 		User user = new User(userPostRequest.getContrasenya());
 		return new ResponseEntity<Integer>(userRepository.alterPassword(user), HttpStatus.OK);
 

@@ -3,10 +3,12 @@ package com.elorrieta.Grupo1.MyTube_Music.repository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.elorrieta.Grupo1.MyTube_Music.exceptions.UserNotFoundException;
 import com.elorrieta.Grupo1.MyTube_Music.model.User;
 
 @Repository
@@ -17,14 +19,19 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	public List<User> findAll() {
-		jdbcTemplate.query("SELECT * FROM usuarios ", BeanPropertyRowMapper.newInstance(User.class));
-		return null;
+		return jdbcTemplate.query("select * from usuarios", BeanPropertyRowMapper.newInstance(User.class));
+		 
 	}
 
 	@Override
-	public User findById(long id) {
-		jdbcTemplate.query("SELECT * FROM usuarios WHERE id = ?", BeanPropertyRowMapper.newInstance(User.class), id);
-		return null;
+	public User findById(long id) throws UserNotFoundException {
+		try {
+			return jdbcTemplate.queryForObject("SELECT * FROM usuarios WHERE id = ?", BeanPropertyRowMapper.newInstance(User.class), id);
+		}  catch (EmptyResultDataAccessException e) {
+			throw new UserNotFoundException(e.getMessage());
+		}
+
+		
 	}
 
 	@Override
@@ -61,8 +68,8 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	public User loginUser(String login) {
-		jdbcTemplate.query("SELECT * FROM usuarios WHERE login = ?", BeanPropertyRowMapper.newInstance(User.class), login);
-		return null;
+			return jdbcTemplate.queryForObject("SELECT * FROM usuarios WHERE login = ?", BeanPropertyRowMapper.newInstance(User.class), login);
+	
 	}
 
 }
