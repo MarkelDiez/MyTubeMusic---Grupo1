@@ -11,4 +11,8 @@ public interface SongRepository {
 	List<Song> findAll();
 	List<Song> findByTitle(String titulo) throws TitleNotFoundException;
 	List<Song> findByAuthor(String autor) throws AuthorNotFoundException;
+	Song findById(int id);
+	int create(Song song);
+	int update(Song song);
+	int deleteById(Integer id);
 }
