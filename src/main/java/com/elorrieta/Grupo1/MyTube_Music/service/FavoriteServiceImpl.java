@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.elorrieta.Grupo1.MyTube_Music.exceptions.UserNotFoundException;
 import com.elorrieta.Grupo1.MyTube_Music.model.Song;
 import com.elorrieta.Grupo1.MyTube_Music.model.SongServiceResponse;
 import com.elorrieta.Grupo1.MyTube_Music.repository.FavoriteRepository;
@@ -17,13 +18,23 @@ public class FavoriteServiceImpl implements FavoriteService {
 	FavoriteRepository favoriteRepository;
 
 	@Override
-	public List<SongServiceResponse> findFavoriteList(Integer id) {
+	public List<SongServiceResponse> findFavoriteList(Integer id) throws UserNotFoundException{
 		List<SongServiceResponse> response = new ArrayList<SongServiceResponse>();
 		List<Song> favoriteSongList = favoriteRepository.findFavoriteList(id);
 		for (Song song : favoriteSongList) {
 			response.add(new SongServiceResponse(song.getId(), song.getTitulo(), song.getAutor(), song.getURL()));
 		}
 		return response;
+	}
+
+	@Override
+	public int deleteFromFavorite(Integer idUser, Integer idSong) {
+		return favoriteRepository.deleteFromFavorite(idUser, idSong);
+	}
+
+	@Override
+	public Integer addFavoriteSong(Integer idUser, Integer idSong) {
+		return favoriteRepository.addFavoriteSong(idUser, idSong);
 	}
 
 }

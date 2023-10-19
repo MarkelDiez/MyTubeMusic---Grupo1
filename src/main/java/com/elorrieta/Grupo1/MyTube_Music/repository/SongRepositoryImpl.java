@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import com.elorrieta.Grupo1.MyTube_Music.exceptions.AuthorNotFoundException;
 import com.elorrieta.Grupo1.MyTube_Music.exceptions.TitleNotFoundException;
 import com.elorrieta.Grupo1.MyTube_Music.model.Song;
-import com.elorrieta.Grupo1.MyTube_Music.model.SongPostRequest;
 
 @Repository
 public class SongRepositoryImpl implements SongRepository {

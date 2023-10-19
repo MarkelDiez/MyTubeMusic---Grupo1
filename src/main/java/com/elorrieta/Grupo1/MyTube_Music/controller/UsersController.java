@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.elorrieta.Grupo1.MyTube_Music.exceptions.UserNotFoundException;
 import com.elorrieta.Grupo1.MyTube_Music.model.User;
 import com.elorrieta.Grupo1.MyTube_Music.model.UserPostRequest;
 import com.elorrieta.Grupo1.MyTube_Music.repository.UserRepository;
@@ -30,13 +31,8 @@ public class UsersController {
 		return new ResponseEntity<List<User>>(userRepository.findAll(), HttpStatus.OK);
 	}
 
-<<<<<<< HEAD
-	@GetMapping("/api/user/{id}")
-	public ResponseEntity<User> findById(@PathVariable long id) throws UserNotFoundException {
-=======
 	@GetMapping("/user/{id}")
 	public ResponseEntity<User> findById(@PathVariable long id) throws UserNotFoundException {
->>>>>>> 5cf270d01ec3072dde2df00ff390a53123dd1c9e
 		return new ResponseEntity<User>(userRepository.findById(id), HttpStatus.OK);
 	}
 
