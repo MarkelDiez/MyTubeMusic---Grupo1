@@ -50,7 +50,7 @@ public class SongController {
 
 	@PostMapping("/api/song")
 	public ResponseEntity<Integer> createSong(@RequestBody SongPostRequest songPostRequest) {
-		Song song = new Song(null, songPostRequest.getTitulo(), songPostRequest.getAutor(), songPostRequest.getURL());
+		Song song = new Song(songPostRequest.getTitulo(), songPostRequest.getAutor(), songPostRequest.getURL());
 
 		return new ResponseEntity<Integer>(songService.create(song), HttpStatus.CREATED);
 	}
