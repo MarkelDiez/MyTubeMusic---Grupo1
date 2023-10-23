@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.elorrieta.Grupo1.MyTube_Music.exceptions.UserNotFoundException;
+import com.elorrieta.Grupo1.MyTube_Music.model.Favorite;
 import com.elorrieta.Grupo1.MyTube_Music.model.Song;
 import com.elorrieta.Grupo1.MyTube_Music.model.SongServiceResponse;
 import com.elorrieta.Grupo1.MyTube_Music.repository.FavoriteRepository;
@@ -33,8 +34,8 @@ public class FavoriteServiceImpl implements FavoriteService {
 	}
 
 	@Override
-	public Integer addFavoriteSong(Integer idUser, Integer idSong) {
-		return favoriteRepository.addFavoriteSong(idUser, idSong);
+	public int addFavoriteSong(Favorite favorite) {
+		return favoriteRepository.addFavoriteSong(favorite);
 	}
 
 }

@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.elorrieta.Grupo1.MyTube_Music.exceptions.UserNotFoundException;
+import com.elorrieta.Grupo1.MyTube_Music.model.Favorite;
 import com.elorrieta.Grupo1.MyTube_Music.model.Song;
 
 @Repository
@@ -17,7 +18,7 @@ public class FavoriteRepositoryImpl implements FavoriteRepository {
 	JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<Song> findFavoriteList(Integer id) throws UserNotFoundException{
+	public List<Song> findFavoriteList(Integer id) throws UserNotFoundException {
 		return jdbcTemplate.query(
 				"SELECT c.id, c.titulo, c.autor, c.url FROM canciones c INNER JOIN favoritas f ON f.id_cancion = c.id WHERE id_usuario = ?",
 				BeanPropertyRowMapper.newInstance(Song.class), id);
@@ -29,8 +30,9 @@ public class FavoriteRepositoryImpl implements FavoriteRepository {
 	}
 
 	@Override
-	public Integer addFavoriteSong(Integer idUser, Integer idSong) {
-		return jdbcTemplate.update("INSERT INTO favoritas (id_usuario, id_cancion) VALUES (?,?)", idUser, idSong);
+	public int addFavoriteSong(Favorite favorite) {
+		return jdbcTemplate.update("INSERT INTO favoritas (id_usuario, id_cancion) VALUES (?,?)",
+				new Object[] { favorite.getId_usuario(), favorite.getId_cancion() });
 	}
 
 }
