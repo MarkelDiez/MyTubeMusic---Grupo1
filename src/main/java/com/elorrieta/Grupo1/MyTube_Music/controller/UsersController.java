@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.elorrieta.Grupo1.MyTube_Music.exceptions.UserNotFoundException;
 import com.elorrieta.Grupo1.MyTube_Music.model.User;
 import com.elorrieta.Grupo1.MyTube_Music.model.UserPostRequest;
-import com.elorrieta.Grupo1.MyTube_Music.repository.UserRepository;
+import com.elorrieta.Grupo1.MyTube_Music.model.UserServiceResponse;
+import com.elorrieta.Grupo1.MyTube_Music.service.UserService;
 
 import jakarta.validation.Valid;
 
@@ -24,44 +25,45 @@ import jakarta.validation.Valid;
 @RequestMapping("api")
 public class UsersController {
 	@Autowired
-	UserRepository userRepository;
+	UserService userService;
 
 	@GetMapping("/user")
-	public ResponseEntity<List<User>> findAll() throws UserNotFoundException {
-		return new ResponseEntity<List<User>>(userRepository.findAll(), HttpStatus.OK);
+	public ResponseEntity<List<UserServiceResponse>> findAll() throws UserNotFoundException {
+		return new ResponseEntity<List<UserServiceResponse>>(userService.getAllUsers(), HttpStatus.OK);
 	}
 
 	@GetMapping("/user/{id}")
-	public ResponseEntity<User> findById(@PathVariable long id) throws UserNotFoundException {
-		return new ResponseEntity<User>(userRepository.findById(id), HttpStatus.OK);
+	public ResponseEntity<UserServiceResponse> findById(@PathVariable int id) throws UserNotFoundException {
+		return new ResponseEntity<UserServiceResponse>(userService.getUserById(id), HttpStatus.OK);
 	}
 
 	@PostMapping("/register")
 	public ResponseEntity<Integer> registerUser(@Valid @RequestBody UserPostRequest userPostRequest) {
 		User user = new User(userPostRequest.getLogin(), userPostRequest.getNombre(), userPostRequest.getApellido(),
 				userPostRequest.getMail(), userPostRequest.getContrasenya());
-		return new ResponseEntity<Integer>(userRepository.register(user), HttpStatus.CREATED);
+		return new ResponseEntity<Integer>(userService.registerUser(user), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/login/{login}")
-	public ResponseEntity<User> loginUser(@PathVariable String login) throws UserNotFoundException {
-		return new ResponseEntity<User>(userRepository.loginUser(login), HttpStatus.OK);
+	public ResponseEntity<UserServiceResponse> loginUser(@PathVariable String login) throws UserNotFoundException {
+		return new ResponseEntity<UserServiceResponse>(userService.getloginUser(login), HttpStatus.OK);
 
 	}
+
 	@PutMapping("/active/{id}")
-	public ResponseEntity<Integer> alterActive(@PathVariable("id") long id,
-			@Valid @RequestBody UserPostRequest userPostRequest) {
-		User user = new User(userPostRequest.getContrasenya());
-		return new ResponseEntity<Integer>(userRepository.alterActive(user), HttpStatus.OK);
+	public ResponseEntity<Integer> alterActive(@PathVariable("id") int id) {
+		return new ResponseEntity<Integer>(userService.alterActiveUser(id), HttpStatus.OK);
 
 	}
 	
-
 	@PutMapping("/password/{id}")
-	public ResponseEntity<Integer> alterPassword(@PathVariable("id") long id,
-			@Valid @RequestBody UserPostRequest userPostRequest) {
-		User user = new User(userPostRequest.getContrasenya());
-		return new ResponseEntity<Integer>(userRepository.alterPassword(user), HttpStatus.OK);
+	public ResponseEntity<Integer> changePass(@PathVariable("id") int id, @RequestBody User user) {
+		return new ResponseEntity<Integer>(userService.changePass(id, user), HttpStatus.OK);
+	}
+
+	@PutMapping("/user/{id}")
+	public ResponseEntity<Integer> alterLogin(@PathVariable("id") int id, @RequestBody UserPostRequest userPostRequest) {
+		return new ResponseEntity<Integer>(userService.alterLogin(id, userPostRequest), HttpStatus.OK);
 
 	}
 

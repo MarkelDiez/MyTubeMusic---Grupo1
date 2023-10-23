@@ -35,6 +35,7 @@ public class UserPostRequest {
 			@Email (message="Formato de mail incorrecto") String mail, 
 			@NotNull(message = "El campo password no puede ser nulo") @NotEmpty(message = "El campo password no puede estar vacio")	@NotBlank(message = "El campo password no puede estar en blanco")String contrasenya, 
 			boolean activo) {
+		this.id = id;
 		this.login = login;
 		this.nombre = nombre;
 		this.apellido = apellido;
