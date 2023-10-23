@@ -31,6 +31,7 @@ public class SongServiceImpl implements SongService {
 	@Override
 	public List<SongServiceResponse> findByTitle(String titulo) throws TitleNotFoundException {
 		List<SongServiceResponse> response = new ArrayList<SongServiceResponse>();
+		titulo = "%"+ titulo + "%";
 		List<Song> songList = songRepository.findByTitle(titulo);
 		for (Song song : songList) {
 			response.add(new SongServiceResponse(song.getId(), song.getTitulo(), song.getAutor(), song.getURL()));
@@ -41,6 +42,7 @@ public class SongServiceImpl implements SongService {
 	@Override
 	public List<SongServiceResponse> findByAuthor(String autor) throws AuthorNotFoundException {
 		List<SongServiceResponse> response = new ArrayList<SongServiceResponse>();
+		autor = "%" + autor + "%";
 		List<Song> songList = songRepository.findByAuthor(autor);
 		for (Song song : songList) {
 			response.add(new SongServiceResponse(song.getId(), song.getTitulo(), song.getAutor(), song.getURL()));

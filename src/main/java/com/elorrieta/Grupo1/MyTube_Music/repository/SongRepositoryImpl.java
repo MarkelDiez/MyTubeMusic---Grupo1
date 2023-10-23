@@ -29,13 +29,13 @@ public class SongRepositoryImpl implements SongRepository {
 
 	@Override
 	public List<Song> findByTitle(String titulo) throws TitleNotFoundException {
-		return jdbcTemplate.query("SELECT * FROM canciones WHERE titulo = ?",
+		return jdbcTemplate.query("SELECT * FROM canciones WHERE titulo LIKE ?",
 				BeanPropertyRowMapper.newInstance(Song.class), titulo);
 	}
 
 	@Override
 	public List<Song> findByAuthor(String autor) throws AuthorNotFoundException {
-		return jdbcTemplate.query("SELECT * FROM canciones WHERE autor = ?",
+		return jdbcTemplate.query("SELECT * FROM canciones WHERE autor LIKE ?",
 				BeanPropertyRowMapper.newInstance(Song.class), autor);
 	}
 
