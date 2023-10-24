@@ -31,13 +31,13 @@ public class SongController {
 
 	}
 
-	@GetMapping("/api/songs/title/{titulo}")
+	@GetMapping("/api/song/title/{titulo}")
 	public ResponseEntity<List<SongServiceResponse>> findByTitle(@PathVariable("titulo") String titulo)
 			throws TitleNotFoundException {
 		return new ResponseEntity<List<SongServiceResponse>>(songService.findByTitle(titulo), HttpStatus.OK);
 	}
 
-	@GetMapping("/api/songs/author/{autor}")
+	@GetMapping("/api/song/author/{autor}")
 	public ResponseEntity<List<SongServiceResponse>> findByAuthor(@PathVariable("autor") String autor)
 			throws AuthorNotFoundException {
 		return new ResponseEntity<List<SongServiceResponse>>(songService.findByAuthor(autor), HttpStatus.OK);
@@ -50,14 +50,14 @@ public class SongController {
 
 	@PostMapping("/api/song")
 	public ResponseEntity<Integer> createSong(@RequestBody SongPostRequest songPostRequest) {
-		Song song = new Song(songPostRequest.getTitulo(), songPostRequest.getAutor(), songPostRequest.getURL());
+		Song song = new Song(songPostRequest.getTitulo(), songPostRequest.getAutor(), songPostRequest.getURL(), songPostRequest.getImagen());
 
 		return new ResponseEntity<Integer>(songService.create(song), HttpStatus.CREATED);
 	}
 
 	@PutMapping("/api/song/{id}")
 	public ResponseEntity updateSong(@PathVariable("id") Integer id, @RequestBody SongPostRequest songPostRequest) {
-		Song song = new Song(id,songPostRequest.getTitulo(), songPostRequest.getAutor(), songPostRequest.getURL());
+		Song song = new Song(id,songPostRequest.getTitulo(), songPostRequest.getAutor(), songPostRequest.getURL(), songPostRequest.getImagen());
 		
 		return new ResponseEntity(songService.update(song), HttpStatus.CREATED);
 

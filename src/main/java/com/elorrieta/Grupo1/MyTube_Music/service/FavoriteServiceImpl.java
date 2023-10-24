@@ -23,7 +23,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 		List<SongServiceResponse> response = new ArrayList<SongServiceResponse>();
 		List<Song> favoriteSongList = favoriteRepository.findFavoriteList(id);
 		for (Song song : favoriteSongList) {
-			response.add(new SongServiceResponse(song.getId(), song.getTitulo(), song.getAutor(), song.getURL()));
+			response.add(new SongServiceResponse(song.getId(), song.getTitulo(), song.getAutor(), song.getURL(), song.getImagen()));
 		}
 		return response;
 	}
