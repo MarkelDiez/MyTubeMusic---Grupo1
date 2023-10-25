@@ -20,7 +20,7 @@ public class FavoriteRepositoryImpl implements FavoriteRepository {
 	@Override
 	public List<Song> findFavoriteList(Integer id) throws UserNotFoundException {
 		return jdbcTemplate.query(
-				"SELECT c.id, c.titulo, c.autor, c.url FROM canciones c INNER JOIN favoritas f ON f.id_cancion = c.id WHERE id_usuario = ?",
+				"SELECT c.id, c.titulo, c.autor, c.url, c.imagen FROM canciones c INNER JOIN favoritas f ON f.id_cancion = c.id WHERE id_usuario = ?",
 				BeanPropertyRowMapper.newInstance(Song.class), id);
 	}
 
