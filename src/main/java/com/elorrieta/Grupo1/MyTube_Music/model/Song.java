@@ -19,24 +19,32 @@ public class Song {
 	@NotEmpty(message = "El campo URL no puede estar vacio")
 	@NotBlank(message = "El campo URL no puede estar en blanco")
 	private String URL;
+	@NotNull(message = "El campo URL no puede ser nulo")
+	@NotEmpty(message = "El campo URL no puede estar vacio")
+	@NotBlank(message = "El campo URL no puede estar en blanco")
+	private String imagen;
 
 	public Song(int id,
 			@NotNull(message = "El campo titulo no puede ser nulo") @NotEmpty(message = "El campo titulo no puede estar vacio") @NotBlank(message = "El campo titulo no puede estar en blanco") String titulo,
 			@NotNull(message = "El campo autor no puede ser nulo") @NotEmpty(message = "El campo autor no puede estar vacio") @NotBlank(message = "El campo autor no puede estar en blanco") String autor,
-			@NotNull(message = "El campo URL no puede ser nulo") @NotEmpty(message = "El campo URL no puede estar vacio") @NotBlank(message = "El campo URL no puede estar en blanco") String uRL) {
+			@NotNull(message = "El campo URL no puede ser nulo") @NotEmpty(message = "El campo URL no puede estar vacio") @NotBlank(message = "El campo URL no puede estar en blanco") String uRL,
+			@NotNull(message = "El campo URL no puede ser nulo") @NotEmpty(message = "El campo URL no puede estar vacio") @NotBlank(message = "El campo URL no puede estar en blanco") String imagen) {
 		this.id = id;
 		this.titulo = titulo;
 		this.autor = autor;
 		URL = uRL;
+		this.imagen = imagen;
 	}
 
 	public Song(
 			@NotNull(message = "El campo titulo no puede ser nulo") @NotEmpty(message = "El campo titulo no puede estar vacio") @NotBlank(message = "El campo titulo no puede estar en blanco") String titulo,
 			@NotNull(message = "El campo autor no puede ser nulo") @NotEmpty(message = "El campo autor no puede estar vacio") @NotBlank(message = "El campo autor no puede estar en blanco") String autor,
-			@NotNull(message = "El campo URL no puede ser nulo") @NotEmpty(message = "El campo URL no puede estar vacio") @NotBlank(message = "El campo URL no puede estar en blanco") String uRL) {
+			@NotNull(message = "El campo URL no puede ser nulo") @NotEmpty(message = "El campo URL no puede estar vacio") @NotBlank(message = "El campo URL no puede estar en blanco") String uRL,
+			@NotNull(message = "El campo URL no puede ser nulo") @NotEmpty(message = "El campo URL no puede estar vacio") @NotBlank(message = "El campo URL no puede estar en blanco") String imagen) {
 		this.titulo = titulo;
 		this.autor = autor;
 		URL = uRL;
+		this.imagen = imagen;
 	}
 
 	public Song() {
@@ -74,9 +82,20 @@ public class Song {
 		URL = uRL;
 	}
 
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
 	@Override
 	public String toString() {
-		return "Song [id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", URL=" + URL + "]";
+		return "Song [id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", URL=" + URL + ", imagen=" + imagen
+				+ "]";
 	}
+
+
 
 }

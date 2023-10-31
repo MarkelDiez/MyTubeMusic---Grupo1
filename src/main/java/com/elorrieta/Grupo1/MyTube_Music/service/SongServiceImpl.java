@@ -23,7 +23,7 @@ public class SongServiceImpl implements SongService {
 		List<SongServiceResponse> response = new ArrayList<SongServiceResponse>();
 		List<Song> songList = songRepository.findAll();
 		for (Song song : songList) {
-			response.add(new SongServiceResponse(song.getId(), song.getTitulo(), song.getAutor(), song.getURL()));
+			response.add(new SongServiceResponse(song.getId(), song.getTitulo(), song.getAutor(), song.getURL(), song.getImagen()));
 		}
 		return response;
 	}
@@ -34,7 +34,7 @@ public class SongServiceImpl implements SongService {
 		titulo = "%"+ titulo + "%";
 		List<Song> songList = songRepository.findByTitle(titulo);
 		for (Song song : songList) {
-			response.add(new SongServiceResponse(song.getId(), song.getTitulo(), song.getAutor(), song.getURL()));
+			response.add(new SongServiceResponse(song.getId(), song.getTitulo(), song.getAutor(), song.getURL(), song.getImagen()));
 		}
 		return response;
 	}
@@ -45,7 +45,7 @@ public class SongServiceImpl implements SongService {
 		autor = "%" + autor + "%";
 		List<Song> songList = songRepository.findByAuthor(autor);
 		for (Song song : songList) {
-			response.add(new SongServiceResponse(song.getId(), song.getTitulo(), song.getAutor(), song.getURL()));
+			response.add(new SongServiceResponse(song.getId(), song.getTitulo(), song.getAutor(), song.getURL(), song.getImagen()));
 		}
 		return response;
 	}
@@ -53,7 +53,7 @@ public class SongServiceImpl implements SongService {
 	@Override
 	public SongServiceResponse findById(int id) {
 		Song song = songRepository.findById(id);
-		return new SongServiceResponse(song.getId(), song.getTitulo(), song.getAutor(), song.getURL());
+		return new SongServiceResponse(song.getId(), song.getTitulo(), song.getAutor(), song.getURL(), song.getImagen());
 	}
 
 	@Override

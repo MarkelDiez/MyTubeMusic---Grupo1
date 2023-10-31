@@ -47,15 +47,15 @@ public class SongRepositoryImpl implements SongRepository {
 
 	@Override
 	public int create(Song song) {
-		return jdbcTemplate.update("INSERT INTO canciones (titulo, autor, url) VALUES (?, ?, ?)",
-				new Object[] { song.getTitulo(), song.getAutor(), song.getURL() });
+		return jdbcTemplate.update("INSERT INTO canciones (titulo, autor, url, imagen) VALUES (?, ?, ?, ?)",
+				new Object[] { song.getTitulo(), song.getAutor(), song.getURL(), song.getImagen() });
 	}
 
 	@Override
 	public int update(Song song) {
 		return jdbcTemplate.update(
-		"UPDATE canciones SET titulo = ?, autor = ?, url = ? WHERE id = ?",
-		new Object[] { song.getTitulo(), song.getAutor(), song.getURL(), song.getId() });
+		"UPDATE canciones SET titulo = ?, autor = ?, url = ?, imagen = ? WHERE id = ?",
+		new Object[] { song.getTitulo(), song.getAutor(), song.getURL(), song.getImagen(), song.getId() });
 	}
 
 	@Override

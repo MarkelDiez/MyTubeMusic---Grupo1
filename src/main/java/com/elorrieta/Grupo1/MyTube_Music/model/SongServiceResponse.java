@@ -6,13 +6,15 @@ public class SongServiceResponse {
 	private String titulo;
 	private String autor;
 	private String URL;
+	private String imagen;
 	
 	
-	public SongServiceResponse(Integer id, String titulo, String autor, String uRL) {
+	public SongServiceResponse(Integer id, String titulo, String autor, String uRL, String imagen) {
 		this.id = id;
 		this.titulo = titulo;
 		this.autor = autor;
 		URL = uRL;
+		this.imagen = imagen;
 	}
 
 	public SongServiceResponse() {
@@ -49,6 +51,21 @@ public class SongServiceResponse {
 	public void setURL(String uRL) {
 		URL = uRL;
 	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
+	@Override
+	public String toString() {
+		return "SongServiceResponse [id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", URL=" + URL
+				+ ", imagen=" + imagen + "]";
+	}
+	
 	
 	
 }
