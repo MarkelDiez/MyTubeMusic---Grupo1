@@ -1,26 +1,40 @@
 package com.elorrieta.Grupo1.MyTube_Music.model;
 
-import java.util.Collection;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-public class User implements UserDetails {
+public class User {
 
 	private int id;
-
+	@NotNull(message = "El campo login no puede ser nulo")
+	@NotEmpty(message = "El campo login no puede estar vacio")
+	@NotBlank(message = "El campo login no puede estar en blanco")
 	private String login;
-
+	@NotNull(message = "El campo nombre no puede ser nulo")
+	@NotEmpty(message = "El campo nombre no puede estar vacio")
+	@NotBlank(message = "El campo nombre no puede estar en blanco")
 	private String nombre;
-
+	@NotNull(message = "El campo apellido no puede ser nulo")
+	@NotEmpty(message = "El campo apellido no puede estar vacio")
+	@NotBlank(message = "El campo apellido no puede estar en blanco")
 	private String apellido;
-
+	@Email (message="Formato de mail incorrecto")
 	private String mail;
-
+	@NotNull(message = "El campo password no puede ser nulo")
+	@NotEmpty(message = "El campo password no puede estar vacio")
+	@NotBlank(message = "El campo password no puede estar en blanco")
 	private String contrasenya;
 	private boolean activo;
 
-	public User(int id, String login, String nombre, String apellido, String mail, String contrasenya, boolean activo) {
+	public User(int id,
+			@NotNull(message = "El campo login no puede ser nulo") @NotEmpty(message = "El campo login no puede estar vacio") @NotBlank(message = "El campo login no puede estar en blanco") String login,
+			@NotNull(message = "El campo nombre no puede ser nulo") @NotEmpty(message = "El campo nombre no puede estar vacio") @NotBlank(message = "El campo nombre no puede estar en blanco") String nombre,
+			@NotNull(message = "El campo apellido no puede ser nulo") @NotEmpty(message = "El campo apellido no puede estar vacio") @NotBlank(message = "El campo apellido no puede estar en blanco") String apellido,
+			@Email (message="Formato de mail incorrecto") String mail, 
+			@NotNull(message = "El campo password no puede ser nulo") @NotEmpty(message = "El campo password no puede estar vacio")	@NotBlank(message = "El campo password no puede estar en blanco")String contrasenya, 
+			boolean activo) {
 		this.id = id;
 		this.login = login;
 		this.nombre = nombre;
@@ -29,12 +43,15 @@ public class User implements UserDetails {
 		this.contrasenya = contrasenya;
 		this.activo = activo;
 	}
-
 	public User() {
 		super();
 	}
-
-	public User(String login, String nombre, String apellido, String mail, String contrasenya) {
+	public User(
+			@NotNull(message = "El campo login no puede ser nulo") @NotEmpty(message = "El campo login no puede estar vacio") @NotBlank(message = "El campo login no puede estar en blanco") String login,
+			@NotNull(message = "El campo nombre no puede ser nulo") @NotEmpty(message = "El campo nombre no puede estar vacio") @NotBlank(message = "El campo nombre no puede estar en blanco") String nombre,
+			@NotNull(message = "El campo apellido no puede ser nulo") @NotEmpty(message = "El campo apellido no puede estar vacio") @NotBlank(message = "El campo apellido no puede estar en blanco") String apellido,
+			@Email (message="Formato de mail incorrecto") String mail, 
+			@NotNull(message = "El campo password no puede ser nulo") @NotEmpty(message = "El campo password no puede estar vacio")	@NotBlank(message = "El campo password no puede estar en blanco")String contrasenya) {
 		this.login = login;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -43,10 +60,11 @@ public class User implements UserDetails {
 
 	}
 
+
+
 	public User(String contrasenya) {
 		this.contrasenya = contrasenya;
 	}
-
 	public int getId() {
 		return id;
 	}
@@ -107,48 +125,6 @@ public class User implements UserDetails {
 	public String toString() {
 		return "Usuarios [id=" + id + ", login=" + login + ", nombre=" + nombre + ", apellido=" + apellido + ", mail="
 				+ mail + ", contrasenya=" + contrasenya + ", activo=" + activo + "]";
-	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return contrasenya;
-	}
-
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return login;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
 	}
 
 }
