@@ -19,7 +19,6 @@ public class UserServiceResponse {
 	@NotNull(message = "El campo apellido no puede ser nulo")
 	@NotEmpty(message = "El campo apellido no puede estar vacio")
 	@NotBlank(message = "El campo apellido no puede estar en blanco")
-	
 	private String apellido;
 	@Email (message="Formato de mail incorrecto")
 	private String mail;

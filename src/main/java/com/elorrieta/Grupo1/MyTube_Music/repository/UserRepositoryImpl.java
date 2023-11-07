@@ -1,6 +1,6 @@
 package com.elorrieta.Grupo1.MyTube_Music.repository;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import com.elorrieta.Grupo1.MyTube_Music.exceptions.UserNotFoundException;
 import com.elorrieta.Grupo1.MyTube_Music.model.User;
+import com.elorrieta.Grupo1.MyTube_Music.model.UserPostRequest;
+import com.elorrieta.Grupo1.MyTube_Music.model.UserServiceResponse;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -17,11 +19,11 @@ public class UserRepositoryImpl implements UserRepository {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-//	@Override
-//	public List<User> findAll() {
-//		return jdbcTemplate.query("select * from usuarios", BeanPropertyRowMapper.newInstance(User.class));
-//		 
-//	}
+	@Override
+	public List<User> findAll() {
+		return jdbcTemplate.query("select * from usuarios", BeanPropertyRowMapper.newInstance(User.class));
+		 
+	}
 
 	@Override
 	public User findById(int id) throws UserNotFoundException {
@@ -34,11 +36,11 @@ public class UserRepositoryImpl implements UserRepository {
 		
 	}
 
-//	@Override
-//	public int register(User user) {
-//		return jdbcTemplate.update("INSERT INTO usuarios (login, nombre, apellido, mail,contrasenya) VALUES (?,?,?,?,?)",
-//				new Object[] {user.getLogin(), user.getNombre(),user.getApellido(), user.getMail(), user.getContrasenya() });
-//	}
+	@Override
+	public int register(User user) {
+		return jdbcTemplate.update("INSERT INTO usuarios (login, nombre, apellido, mail,contrasenya) VALUES (?,?,?,?,?)",
+				new Object[] {user.getLogin(), user.getNombre(),user.getApellido(), user.getMail(), user.getContrasenya() });
+	}
 	
 
 	@Override
@@ -59,11 +61,11 @@ public class UserRepositoryImpl implements UserRepository {
 		return jdbcTemplate.update("DELETE FROM usuarios WHERE id = ?", id );
 	}
 
-//	@Override
-//	public User loginUser(String login) {
-//			return jdbcTemplate.queryForObject("SELECT * FROM usuarios WHERE login = ?", BeanPropertyRowMapper.newInstance(User.class), login);
-//	
-//	}
+	@Override
+	public User loginUser(String login) {
+			return jdbcTemplate.queryForObject("SELECT * FROM usuarios WHERE login = ?", BeanPropertyRowMapper.newInstance(User.class), login);
+	
+	}
 
 	@Override
 	public int alterLogin(int id, User user) {
@@ -73,34 +75,6 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public int changePass(int id, User user) {
 		return jdbcTemplate.update("UPDATE usuarios set contrasenya = ? WHERE id = ?", new Object[] {user.getContrasenya(), id });
-	}
-
-	@Override
-	public Optional<User> findByLogin(String login) {
-		// TODO Auto-generated method stub
-		try {
-			User user = jdbcTemplate.queryForObject("SELECT * from usuarios where login = ?", BeanPropertyRowMapper.newInstance(User.class), login);
-			return Optional.of(user);
-		} catch (EmptyResultDataAccessException e){
-			e.printStackTrace();
-			return Optional.empty();
-		}
-	}
-
-	@Override
-	public int create(User user) {
-	// IMPORTANTE: la contrasenia ha tenido que ser cifrada antes de entrar aqui
-		
-		// TODO podria darnos excepcion por que el email es unico		
-		return jdbcTemplate.update("INSERT INTO usuarios (login, nombre, apellido, mail,contrasenya) VALUES (?,?,?,?,?)",
-			new Object[] { 
-				user.getLogin(), 
-				user.getNombre(),
-				user.getApellido(), 
-				user.getMail(),
-				user.getContrasenya() // debe estar cifrada de antemano
-			}	
-		);
 	}
 
 }
