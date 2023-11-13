@@ -54,7 +54,7 @@ public class UsersController {
 			// por lo que lo convertimos a su modelo real de BD para tener todos sus campos
 			User user = (User) authentication.getPrincipal();
 			String accessToken = jwtUtil.generateAccessToken(user);
-			AuthResponse response = new AuthResponse(user.getLogin(), accessToken);
+			AuthResponse response = new AuthResponse(user.getId(),user.getContrasenya(),user.getLogin(), accessToken);
 			
 			return ResponseEntity.ok().body(response);
 			
