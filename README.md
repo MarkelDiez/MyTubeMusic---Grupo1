@@ -2,7 +2,7 @@
 
 <h1>Instalacion del servidor</h1>
 
-<p>Para instalar el servidor se requiere de : 
+<p>Para instalar el servidor se requiere de : </p>
                             <p>- Mysql </p>
                             <p>- Eclipse </p>
 <p>Para Mysql se usa un archivo de base de datos, la siguiente: https://drive.google.com/file/d/1IC3Wp54-bMxbgSSmjwtK04GoO9Zf8V8N/view</p>
