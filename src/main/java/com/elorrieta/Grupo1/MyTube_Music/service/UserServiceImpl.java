@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.elorrieta.Grupo1.MyTube_Music.exceptions.UserNotFoundException;
 import com.elorrieta.Grupo1.MyTube_Music.model.User;
+import com.elorrieta.Grupo1.MyTube_Music.model.UserChangePass;
 import com.elorrieta.Grupo1.MyTube_Music.model.UserServiceResponse;
 import com.elorrieta.Grupo1.MyTube_Music.repository.UserRepository;
 
@@ -82,17 +85,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 //	}
 
 	@Override
-	public int changePass(int id, User user) {
+	public int changePass(User userDetails, UserChangePass user) {
 		UserServiceResponse userServiceResponse = null;
 		try {
-			userServiceResponse = getUserById(id);
+			userServiceResponse = getUserById(userDetails.getId());
 		} catch (UserNotFoundException e) {
 			e.printStackTrace();
 		}
-		User userconvert = new User(id, userServiceResponse.getLogin(), userServiceResponse.getNombre(),
-				userServiceResponse.getApellido(), userServiceResponse.getMail(), user.getContrasenya(),
-				userServiceResponse.isActivo());
-		return userRepository.changePass(id, userconvert);
+		System.out.println("UserFind " + userServiceResponse.getContrasenya());
+		System.out.println("UserOld " + user.getContrasenyaOld());
+		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+		boolean matches = bcrypt.matches(user.getContrasenyaOld(), userServiceResponse.getContrasenya());
+		if (matches) {
+			String password = bcrypt.encode(user.getContrasenya());
+		return userRepository.changePass(userDetails.getId(), password);
+		}
+		return 0;
 	}
 
 	@Override

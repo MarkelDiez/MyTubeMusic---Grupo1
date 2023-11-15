@@ -21,6 +21,7 @@ import com.elorrieta.Grupo1.MyTube_Music.exceptions.UserNotFoundException;
 import com.elorrieta.Grupo1.MyTube_Music.model.AuthRequest;
 import com.elorrieta.Grupo1.MyTube_Music.model.AuthResponse;
 import com.elorrieta.Grupo1.MyTube_Music.model.User;
+import com.elorrieta.Grupo1.MyTube_Music.model.UserChangePass;
 import com.elorrieta.Grupo1.MyTube_Music.model.UserPostRequest;
 import com.elorrieta.Grupo1.MyTube_Music.model.UserServiceResponse;
 import com.elorrieta.Grupo1.MyTube_Music.service.UserService;
@@ -131,9 +132,11 @@ public class UsersController {
 //
 //	}
 	
-	@PutMapping("/password/{id}")
-	public ResponseEntity<Integer> changePass(@PathVariable("id") int id, @RequestBody User user) {
-		return new ResponseEntity<Integer>(userService.changePass(id, user), HttpStatus.OK);
+	@PutMapping("/password")
+	public ResponseEntity<Integer> changePass(@RequestBody UserChangePass user, Authentication authentication) {
+		User userDetails = (User) authentication.getPrincipal();
+		System.out.println("UserAuth " + userDetails.getContrasenya());
+		return new ResponseEntity<Integer>(userService.changePass(userDetails ,user), HttpStatus.OK);
 	}
 
 //	@PutMapping("/user/{id}")

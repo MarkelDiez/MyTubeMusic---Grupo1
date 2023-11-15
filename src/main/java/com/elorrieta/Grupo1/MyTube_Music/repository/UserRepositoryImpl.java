@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.elorrieta.Grupo1.MyTube_Music.exceptions.UserNotFoundException;
 import com.elorrieta.Grupo1.MyTube_Music.model.User;
+import com.elorrieta.Grupo1.MyTube_Music.model.UserChangePass;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -71,8 +72,8 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
-	public int changePass(int id, User user) {
-		return jdbcTemplate.update("UPDATE usuarios set contrasenya = ? WHERE id = ?", new Object[] {user.getContrasenya(), id });
+	public int changePass(int id, String password) {
+		return jdbcTemplate.update("UPDATE usuarios set contrasenya = ? WHERE id = ?", new Object[] {password, id });
 	}
 
 	@Override

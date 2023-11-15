@@ -2,6 +2,7 @@ package com.elorrieta.Grupo1.MyTube_Music.service;
 
 import com.elorrieta.Grupo1.MyTube_Music.exceptions.UserNotFoundException;
 import com.elorrieta.Grupo1.MyTube_Music.model.User;
+import com.elorrieta.Grupo1.MyTube_Music.model.UserChangePass;
 import com.elorrieta.Grupo1.MyTube_Music.model.UserServiceResponse;
 
 public interface UserService {
@@ -19,6 +20,6 @@ public interface UserService {
 
 	// int alterActiveUser(int id);
 	// int alterLogin(int id, UserPostRequest userPostRequest);
-	int changePass(int id, User user);
+	int changePass(User userDetails, UserChangePass user);
 
 }
