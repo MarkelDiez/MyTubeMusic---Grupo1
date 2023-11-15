@@ -35,3 +35,10 @@ muestra una lista de cancion con las posibilidades que tienes para añadir a fav
         <p>- Estableciendo la ruta de la base de datos del servidor Mysql</p>
         <p>- El usuario y contraseña del servidor de la base de datos</p>
         <p>- El puerto de acceso del servidor SpringBoot</p>
+
+<h1>Usage(uso)</h1>
+
+<p>Para usar la aplicacion una vez clonado los 2 repositorio y haber comprobado en el servidor las direcciones de enrutamiento, haremos el run en eclipse y en la consola observaremos que arranca de manera correcta.</p>
+<p>Para la aplicacion lo que deberemos de hacer es una vez clonada en el fichero de retrofit añadiremos nuestra ip del servidor/Local y en el xml de network_segurity_config.xml añadiremos la direccion ip de nuestro servidor para que se accepte el enviar peticiones http</p>
+
+<p>Comprobar Swagger: http://localhost:8081/swagger-ui/index.html#/</p>
