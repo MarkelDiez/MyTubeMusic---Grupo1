@@ -16,7 +16,9 @@ muestra una lista de cancion con las posibilidades que tienes para añadir a fav
 <p>- Visualizar las canciones</p>
 <p>- Filtrar las caciones por titulo o autor</p>
 <p>- Visualizar las canciones favoritas</p>
-
+<h1>Diagrama de base de datos</h1>
+![image](https://github.com/MarkelDiez/MyTubeMusic---Grupo1/assets/73273279/d626e00d-f04a-451c-9c77-63aae96aff78)
+<p>Es una base de datos recursiva la tabla favoritos esta compuesta por id_usuario, is_cancion </p>
 <h1>Instalacion del servidor</h1>
 
 <p>Para instalar el servidor se requiere de : </p>
